@@ -1,62 +1,48 @@
 from dataclasses import dataclass, field
 from typing import List, Optional
+from enum import IntEnum
 
+class DiaSemana(IntEnum):
+    SEGUNDA = 0
+    TERCA   = 1
+    QUARTA  = 2
+    QUINTA  = 3
+    SEXTA   = 4
+    SABADO  = 5
+
+# Representa uma atividade que precisa ser feita na semana
 @dataclass
-class Professor:
+class Atividade:
     id: str
     nome: str
-    areas: List[str]
+    duracao: int            # horas necessárias para completar
+    prazo: DiaSemana              # dia limite (ex: "segunda", "quarta"...)
+    peso: int               # prioridade da atividade
 
+# Representa um dia da semana (exceto domingo)
 @dataclass
-class Disciplina:
-    id: str
-    nome: str
-    area: str
-    horas_semanais: int
+class Dia:
+    dia: DiaSemana
+    horas_disponiveis: int  # quantas horas a pessoa pode dedicar nesse dia
 
-@dataclass
-class Turma:
-    id: str
-    disciplina_id: str
-    curso: str
-    periodo: str
-    horas_necessarias: int
-    tipo_periodo: str # Ex: "diurno" ou "noturno"
-
-@dataclass
-class Sala:
-    id: str
-    capacidade: int
-    tipo: str # Ex: "teorica" ou "laboratorio"
-
-@dataclass
-class Periodo:
-    id: str
-    dia: str
-    horario: str
-    slot_id: int
-
+# Representa a alocação de uma atividade em um dia
 @dataclass
 class Alocacao:
-    turma_id: str
-    professor_id: str
-    sala_id: str
-    periodo_id: str
-    fixed: bool = False # Atributo opcional com valor padrão
+    atividade_id: str
+    dia: DiaSemana
+    horas_alocadas: int
 
+# Cromossomo (um indivíduo da população)
 @dataclass
 class Individual:
     genes: List[Alocacao] = field(default_factory=list)
     fitness: Optional[float] = None
 
     def clone(self) -> 'Individual':
-        """Retorna uma cópia do indivíduo."""
-        # Cria uma nova lista de genes com cópias dos genes originais
-        cloned_genes = [gene for gene in self.genes]
+        cloned_genes = [Alocacao(**vars(g)) for g in self.genes]
         new_individual = Individual(genes=cloned_genes)
         new_individual.fitness = self.fitness
         return new_individual
 
     def __len__(self) -> int:
-        """Retorna a quantidade de genes (alocações)."""
         return len(self.genes)
