@@ -28,11 +28,6 @@ class Alocacao:
     dia: DiaSemana
     horas_alocadas: int
 
-
-# Cromossomo (indivíduo); Cada tarefa é estimada em um mínimo de 1 hora para resolução, além de que não deve haver mais de 3 horas de atividade em um mesmo dia, a não ser que o
-# total de horas ainda não tenha sido cumprido (prioriza tarefas mais perto)
-
-
 # O horário é considerado bom caso ele seja capaz de terminar todas as suas tarefas e alocar corretamente as horas disponíveis, permitindo o usuário usá-lo para estudos
 @dataclass
 class Cromossomo:
