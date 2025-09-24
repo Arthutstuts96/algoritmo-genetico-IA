@@ -1,1 +1,9 @@
-# Algoritmo Genético
+<img src="/images/gene.png" alt="Ícone de uma fita dupla de DNA, para exemplificar o genético" width=80/>
+
+# Algoritmo Genético 
+
+<p>Este repositório contém o código fonte para resolver um problema de busca a partir de um <strong>algoritmo genético</strong>. O problema escolhido para ser resolvido foi o problema de <strong>geração de grade horária</strong></p>
+
+<p>Tomamos um caminho diferente para, ao invés de gerar a grade horária considerando salas de aula, professores e matérias, como exposto nos artigos de referência, gerar uma grade horária para otimizar resolução de tarefas, considerando a <strong>data de entrega, peso e horas disponíveis na semana</strong></p>
+
+<p>Ao final, o algoritmo retornará um horário, que conterá a grade horária com todas as atividades cadastradas e o que realizar cada dia, para que, ao final da semana, não tenha nenhuma pendência, respeitando a prioridade de cada atividade</p>
