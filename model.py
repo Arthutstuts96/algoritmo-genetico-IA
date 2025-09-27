@@ -28,6 +28,11 @@ class Alocacao:
     dia: DiaSemana
     horas_alocadas: int
 
+    # def clone(self) -> "Alocacao":
+    #     cloned_genes = [Alocacao(**vars(g)) for g in self.genes]
+    #     return Cromossomo(genes=cloned_genes, fitness=self.fitness)
+
+
 # O horário é considerado bom caso ele seja capaz de terminar todas as suas tarefas e alocar corretamente as horas disponíveis, permitindo o usuário usá-lo para estudos
 @dataclass
 class Cromossomo:
@@ -40,35 +45,3 @@ class Cromossomo:
 
     def __len__(self) -> int:
         return len(self.genes)
-
-
-# Funções para gerar a população inicial
-def calcular_horas_totais(atividades: List[Atividade]) -> int:
-    """Horas totais são a soma dos pesos (1h por unidade de peso)."""
-    return sum(a.peso for a in atividades)
-
-
-def gerar_individuo(atividades: List[Atividade]) -> Cromossomo:
-    """Gera uma alocação inicial aleatória respeitando 3h por dia."""
-    genes = []
-    horas_por_dia = {d: 0 for d in DiaSemana}
-
-    for atividade in atividades:
-        horas_restantes = atividade.peso
-        while horas_restantes > 0:
-            dia = random.choice(list(DiaSemana))
-            aloc_horas = min(horas_restantes, 1)  # Cada tarefa tem pelo menos 1 hora
-
-            # respeitar limite de 3h/dia
-            if horas_por_dia[dia] + aloc_horas <= 3:
-                genes.append(Alocacao(atividade.id, dia, aloc_horas))
-                horas_por_dia[dia] += aloc_horas
-                horas_restantes -= aloc_horas
-
-    return Cromossomo(genes)
-
-
-def gerar_populacao_inicial(
-    atividades: List[Atividade], tamanho: int = 4
-) -> List[Cromossomo]:
-    return [gerar_individuo(atividades) for _ in range(tamanho)]

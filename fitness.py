@@ -94,3 +94,8 @@ def calcular_fitness(
         fitness -= (-horas_restantes) * OVERALLOCATION_PENALTY
 
     return float(fitness)
+
+
+def fitness_maximo_teorico(atividades: list[Atividade]) -> float:
+    """Calcula o fitness máximo possível (todas atividades entregues no prazo, sem horas sobrando). Cada atividade concluída no prazo dá: peso + peso*5 = peso*6."""
+    return sum(a.peso * 6 for a in atividades)
