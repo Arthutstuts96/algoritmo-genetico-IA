@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-import random
 from typing import List, Optional
 from enum import IntEnum
 
 
-# Enum para dias da semana (domingo fora, já que não tem atividade)
+# Enum para dias da semana (domingo fora, já que não tem atividade a ser realizada domingo)
 class DiaSemana(IntEnum):
     SEGUNDA = 0
     TERCA = 1
@@ -28,12 +27,8 @@ class Alocacao:
     dia: DiaSemana
     horas_alocadas: int
 
-    # def clone(self) -> "Alocacao":
-    #     cloned_genes = [Alocacao(**vars(g)) for g in self.genes]
-    #     return Cromossomo(genes=cloned_genes, fitness=self.fitness)
 
-
-# O horário é considerado bom caso ele seja capaz de terminar todas as suas tarefas e alocar corretamente as horas disponíveis, permitindo o usuário usá-lo para estudos
+# --- INDIVÍDUO
 @dataclass
 class Cromossomo:
     genes: List[Alocacao] = field(default_factory=list)

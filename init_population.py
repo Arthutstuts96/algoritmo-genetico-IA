@@ -1,6 +1,8 @@
 # Funções para gerar a população inicial
 from typing import List
-from model import *
+from model import Alocacao, Atividade, Cromossomo, DiaSemana
+import random
+
 
 
 # def calcular_horas_totais(atividades: List[Atividade]) -> int:

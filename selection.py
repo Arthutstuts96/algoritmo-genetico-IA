@@ -1,5 +1,6 @@
+import random
 from fitness import calcular_fitness
-from model import *
+from model import Atividade, Cromossomo
 
 
 def torneio_selecao(
